@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-md-8">
+    <h4><%= @post.title %></h4>
+    <p><%= @post.content %></p>
+    <p><strong>Likes:</strong> <%= @post.likes_count %></p>
+    <% if user_signed_in? %>     
+        <%= link_to 'Me gusta', like_post_path(@post), method: :post %>
+        <%= link_to 'No me gusta', dislike_post_path(@post), method: :post, class: 'btn btn-danger' %>
+    <%end %>
+    <%= link_to 'Volver', posts_path, class: 'btn btn-primary' %>
+    <br>
+    <h4>Deja un comentario:</h4>
+    <%= form_with(model: [ @post, Comment.new ], local: true) do |form| %>
+      <div class="form-group">
+        <%= form.text_area :content, placeholder: "Escribe tu comentario aquí...", rows: 3, required: true, class: 'form-control', style: 'width: 500px' %>
+            <% unless user_signed_in? %>
+                 <input type="hidden" name="comment[anonymous]" value="true">
+            <% else %>
+                <input type="hidden" name="comment[anonymous]" value="false">
+            <% end %>
+      </div>
+      <br>
+      <%= form.submit "Comentar", class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+
+  <div class="col-md-4">
+    <h3>Comentarios</h3>
+    <% @post.comments.each do |comment| %>
+      <div class="comment mb-2">
+        <p><strong><%= comment.anonymous ? "Anónimo" : comment.user.email %>:</strong> <%= comment.content %></p>
+      </div>
+    <% end %>
+  </div>
+</div>

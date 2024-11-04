@@ -1,0 +1,5 @@
+<%= form_with(model: [ @post, Comment.new ], local: true) do |form| %>
+  <%= form.text_area :content %>
+  <%= form.check_box :anonymous %> Anónimo?
+  <%= form.submit "Comentar" %>
+<% end %>
