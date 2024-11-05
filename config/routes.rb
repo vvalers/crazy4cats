@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "home/index"
   resources :comments
   resources :posts
   devise_for :users
@@ -9,7 +10,7 @@ Rails.application.routes.draw do
     end
     resources :comments, only: [ :create, :destroy ]
   end
-  root "posts#index"
+  root "home#index"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

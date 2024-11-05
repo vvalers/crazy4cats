@@ -1,11 +1,7 @@
 class CommentsController < ApplicationController
-  def destroy
-  end
-
   def create
     @post = Post.find(params[:post_id])
     @comment = @post.comments.new(comment_params)
-    # Asignar user_id como 0 si es anónimo
     @comment.user_id = comment_params[:anonymous] == "true" ? nil : current_user.id
 
     if @comment.save
@@ -22,6 +18,6 @@ class CommentsController < ApplicationController
   end
 
   def comment_params
-    params.require(:comment).permit(:content, :anonymous)
+    params.require(:comment).permit(:content, :anonymous, :post_id)
   end
 end
