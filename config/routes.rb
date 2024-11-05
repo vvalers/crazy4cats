@@ -4,11 +4,12 @@ Rails.application.routes.draw do
   devise_for :users
   resources :posts do
     member do
-      post 'posts/:id/like', to: 'posts#like', as: :like_post
+      post "like"
       post "dislike"
     end
-  resources :comments, only: [:create]
+    resources :comments, only: [ :create, :destroy ]
   end
+  root "posts#index"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -21,7 +22,8 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
   # Defines the root path route ("/")
-   root "home#index"
-   
-  get '/posts', to: 'posts#index', as: 'user_root'
+
 end
+
+
+

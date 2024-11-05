@@ -40,8 +40,8 @@ class PostsController < ApplicationController
 
   def like
     @post = Post.find(params[:id])
-    @post.increment!(:likes)
-    redirect_to posts_path
+    @post.increment!(:likes_count)
+    redirect_to @post
   end
   def dislike
     @post.dislike
@@ -63,3 +63,6 @@ class PostsController < ApplicationController
     end
   end
 end
+ 
+
+

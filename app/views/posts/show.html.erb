@@ -4,7 +4,7 @@
     <p><%= @post.content %></p>
     <p><strong>Likes:</strong> <%= @post.likes_count %></p>
     <% if user_signed_in? %>     
-        <%= link_to 'Me gusta', like_post_path(@post), method: :post %>
+        <%= link_to 'Me gusta', like_post_path(@post), method: :post, class: 'btn btn-success' %>
         <%= link_to 'No me gusta', dislike_post_path(@post), method: :post, class: 'btn btn-danger' %>
     <%end %>
     <%= link_to 'Volver', posts_path, class: 'btn btn-primary' %>
